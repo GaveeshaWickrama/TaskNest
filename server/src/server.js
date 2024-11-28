@@ -1,26 +1,37 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const authRoutes = require('./routes/auth'); // Import routes
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors');
+const morgan = require('morgan');
+const app = express()
 
-dotenv.config(); // Load environment variables from .env file
-const app = express();
+app.use(cors());
+app.use(morgan('dev'));
 
-// Middleware to parse JSON data in requests
-app.use(express.json());
+const mongoose = require('mongoose')
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log('MongoDB connection error:', err));
+// const userRoutes = require('./routes/userRoutes')
+const authRoutes = require('./routes/authRoutes')
+const adminRoutes = require('./routes/adminRoutes')
 
-// Use the routes for authentication
-app.use('/api/auth', authRoutes);
 
-// Define the port
-const port = process.env.PORT || 5000;
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+mongoose.connect(process.env.MONGO_URI)  //use 127.0.0.1 insted of localhost
+
+const db = mongoose.connection
+
+db.on('error', (error) => console.error(error))
+db.once('open', () => console.log('Connected to Database'))
+
+app.use(express.json())
+app.use('/auth' , authRoutes)
+// app.use('/users', userRoutes)
+app.use('/admin', adminRoutes)
+// app.use('/users',  userRoutes)
+// const test = require('./routes/test')
+// app.use('/test' , test)
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
+app.listen(3000, () => console.log('Server started on port 3000'))
