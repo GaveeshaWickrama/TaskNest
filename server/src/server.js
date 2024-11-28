@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors');
 const morgan = require('morgan');
 const app = express()
+const transporter = require('./config/emailConfig');
 
 app.use(cors());
 app.use(morgan('dev'));
@@ -23,6 +24,13 @@ db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('Connected to Database'))
 
 app.use(express.json())
+transporter.verify((error, success) => {
+    if (error) {
+        console.error('Error connecting to email server:', error);
+    } else {
+        console.log('Email server is ready to send messages.');
+    }
+});
 app.use('/auth' , authRoutes)
 // app.use('/users', userRoutes)
 app.use('/admin', adminRoutes)
@@ -35,3 +43,4 @@ app.get('/', (req, res) => {
 })
 
 app.listen(3000, () => console.log('Server started on port 3000'))
+

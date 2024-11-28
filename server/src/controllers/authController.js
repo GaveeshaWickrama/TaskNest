@@ -18,7 +18,7 @@ const sendOtpEmail = async (email, otp) => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error('Error sending OTP email:', error);
-                resolve('Error sending OTP email'); //change back to reject
+                reject('Error sending OTP email'); //change back to reject
             } else {
                 console.log('OTP email sent:', info.response);
                 resolve('OTP sent to email.');
@@ -29,13 +29,11 @@ const sendOtpEmail = async (email, otp) => {
 
 async function requestRegister(req, res) {
     try {
-        // const { email, password } = req.body;
-        console.log(req.body);
-        console.log("clll");
-        const { firstName, lastName, email, password, reenteredPassword } = req.body;
+        
+        const { firstName, lastName, email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ message: "Email Or Password not defined" });
+        if (!email || !password || !firstName || !lastName ) {
+            return res.status(400).json({ message: "All fields are required." });
         }
 
         // Validate email format
@@ -46,6 +44,7 @@ async function requestRegister(req, res) {
         // Check if email already exists
         const normalizedEmail = email.toLowerCase().trim();
         const existingUser = await User.findOne({ email: normalizedEmail });
+        
         if (existingUser) {
             return res.status(400).json({ message: "Email already in use." });
         }
@@ -58,7 +57,9 @@ async function requestRegister(req, res) {
         const newUserDetails = {
             email: normalizedEmail,
             password: hashedPassword,
-            role: 'user'
+            role: 'user',
+            firstName,
+            lastName
         };
 
         // Check if an OTP request has already been sent
@@ -167,15 +168,15 @@ async function verifyOtp(req, res) {
 
         // Generate JWT token
         const accessToken = jwt.sign(
-            { userId: user._id, email: user.email, role: user.role },
-            process.env.ACCESS_TOKEN_SECRET,
+            { userId: user._id, email: user.email, role: user.role, firstName: user.firstName, lastName: user.lastName, role: user.role },
+            process.env.JWT_SECRET,
             { expiresIn: '24h' } // Token expires in 24 hours
         );
 
         res.status(200).json({
             message: 'Email verified and user account created successfully',
             accessToken: accessToken,
-            user: { id: user._id, email: user.email, role: user.role }
+            user: { id: user._id, email: user.email, role: user.role, firstName: user.firstName, lastName: user.lastName }
         });
     } catch (error) {
         console.error(error);
