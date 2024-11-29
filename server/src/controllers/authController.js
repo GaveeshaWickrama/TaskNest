@@ -76,7 +76,7 @@ async function requestRegister(req, res) {
             // Update OTP count and lastOtpTime
             existingOtp.otpCount += 1;
             existingOtp.lastOtpTime = currentTime;
-            existingOtp.otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+            existingOtp.otp = otpGenerator.generate(4, { upperCaseAlphabets: false, specialChars: false });
             existingOtp.userDetails = newUserDetails;
             await existingOtp.save();
 
@@ -89,7 +89,7 @@ async function requestRegister(req, res) {
             }
         } else {
             // Generate OTP
-            const otp = otpGenerator.generate(6, { upperCaseAlphabets: false, specialChars: false });
+            const otp = otpGenerator.generate(4, { upperCaseAlphabets: false, specialChars: false });
             const otpEntry = new OTP({ email: normalizedEmail, otp, userDetails: newUserDetails });
             await otpEntry.save();
 
@@ -122,13 +122,13 @@ async function loginUser(req, res) {
     try {
         if (await bcrypt.compare(password, user.password)) {
             const accessToken = jwt.sign(
-                { userId: user._id, email: user.email, role: user.role },
-                process.env.ACCESS_TOKEN_SECRET,
+                { userId: user._id, email: user.email, role: user.role, firstName: user.firstName, lastName: user.lastName  },
+                process.env.JWT_SECRET,
                 { expiresIn: '24h' } // Token expires in 24 hours
             );
             res.json({
                 accessToken: accessToken,
-                user: { id: user._id, email: user.email, role: user.role }
+                user: { id: user._id, email: user.email, role: user.role,firstName: user.firstName, lastName: user.lastName  }
             });
         } else {
             res.status(401).json({ message: "Incorrect Email or Password" });
@@ -168,7 +168,7 @@ async function verifyOtp(req, res) {
 
         // Generate JWT token
         const accessToken = jwt.sign(
-            { userId: user._id, email: user.email, role: user.role, firstName: user.firstName, lastName: user.lastName, role: user.role },
+            { userId: user._id, email: user.email, role: user.role, firstName: user.firstName, lastName: user.lastName },
             process.env.JWT_SECRET,
             { expiresIn: '24h' } // Token expires in 24 hours
         );

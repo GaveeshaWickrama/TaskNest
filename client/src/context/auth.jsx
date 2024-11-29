@@ -1,38 +1,82 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import authService from '../services/authService';
 
-// Create the AuthContext
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // user state to store logged in user info
-  const [loading, setLoading] = useState(false); // loading state for API requests
-  const [error, setError] = useState(null); // error state to handle signup errors
+export const AuthProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [emailForVerification, setEmailForVerification] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(null);
 
-  // Simulated signup function (replace with actual API call)
-  const signup = async (userData) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      // Example signup API call (replace with real backend call)
-      // const response = await api.signup(userData); // Un-comment and replace with actual API logic
-
-      // If signup is successful:
-      setUser({ email: userData.email });
-      return { error: null }; // return success response
-    } catch (err) {
-      setError('Signup failed. Please try again.');
-      return { error: 'Signup failed. Please try again.' }; // handle failure
-    } finally {
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = authService.getCurrentUser();
+      const storedToken = authService.getToken();
+      setCurrentUser(user);
+      setToken(storedToken);
       setLoading(false);
+    };
+    fetchUser();
+  }, []);
+
+  const login = async (email, password) => {
+    const { user, error } = await authService.login(email, password);
+    if (user) {
+      setCurrentUser(user);
+      setToken(authService.getToken());
+    }
+    return { user, error };
+  };
+
+  const signup = async (userData) => {
+    const { error } = await authService.signup(userData);
+    if (!error) {
+      setEmailForVerification(userData.email);
+    }
+    return { error };
+  };
+
+  const verifyOtp = async (userData) => {
+    const { user, error } = await authService.verifyOtp(userData);
+    if (user) {
+      setCurrentUser(user);
+      setToken(authService.getToken());
+    }
+    return { user, error };
+  };
+
+  const logout = async () => {
+    await authService.logout();
+    setCurrentUser(null);
+    setToken(null);
+  };
+
+  const requestPasswordReset = async (email) => {
+    try {
+      const response = await authService.requestPasswordReset(email);
+      return { error: null }; // OTP sent successfully
+    } catch (error) {
+      return { error: error.response?.data?.message || 'Error requesting OTP' };
+    }
+  };
+
+  const resetPassword = async (email, otp, newPassword) => {
+    try {
+      const response = await authService.resetPassword(email, otp, newPassword);
+      return { error: null }; // Password reset successfully
+    } catch (error) {
+      return { error: error.response?.data?.message || 'Error resetting password' };
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, signup, loading, error }}>
+    <AuthContext.Provider value={{ currentUser, token, loading, login, signup, verifyOtp, emailForVerification, logout ,  requestPasswordReset,
+      resetPassword,}}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export default AuthProvider;
+export const useAuth = () => useContext(AuthContext);
+
