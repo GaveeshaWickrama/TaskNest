@@ -14,7 +14,7 @@ const authService = {
       const errorMessage = error.response?.data?.message || 'Login failed';
       return { user: null, error: errorMessage };
     }
-  },
+  },          
 
   signup: async (userData) => {
     try {
@@ -54,13 +54,12 @@ const authService = {
 
   requestPasswordReset: async (email) => {
     try {
-      const response = await authService.requestPasswordReset(email);
-      if (response.error) {
-        return { error: response.message };
-      }
-      return { error: null }; // OTP sent successfully
+      console.log("came 11111");
+      await axios.post(`${API_URL}/auth/forgot-password`, email);
+      return { error: null };
     } catch (error) {
-      return { error: 'Error requesting OTP' };
+      const errorMessage = error.response?.data?.message || 'Could not send Otp';
+      return { error: errorMessage };
     }
   },
 

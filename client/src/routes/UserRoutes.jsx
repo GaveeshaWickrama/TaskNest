@@ -5,6 +5,7 @@ import { useAuth } from '../context/auth';
 // import EditProfile from '../pages/common/EditProfile';
 // import Test from '../pages/common/Test'
 import Dashboard from '../pages/user/Dashboard'
+import Profile from '../pages/common/Profile'
 
 function UserRoutes() {
   const { currentUser, loading } = useAuth();
@@ -21,6 +22,7 @@ function UserRoutes() {
       {/* <Route path="/EditProfile" element={currentUser && allowedRoles.includes(currentUser.role) ? <EditProfile /> : <Navigate to="/Unauthorized" />} /> */}
       {/* <Route path="/Test" element={currentUser && allowedRoles.includes(currentUser.role) ? <Test /> : <Navigate to="/Unauthorized" />} /> */}
       <Route path="/dashboard" element={currentUser && allowedRoles.includes(currentUser.role) ? <Dashboard /> : <Navigate to="/Unauthorized" />} />
+      <Route path="/ViewProfile/:id" element={currentUser && allowedRoles.includes(currentUser.role) ? <Profile /> : <Navigate to="/Unauthorized" />} />
      
     </Routes>
   );

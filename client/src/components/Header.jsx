@@ -30,7 +30,7 @@ const Header = ({ toggleNavbar }) => {
   const handleLogout = async () => {
     setDropdownOpen(false); // Close the dropdown
     await logout();
-    navigate("/auth/login"); // Redirect to the home page after logout
+    navigate("/login"); // Redirect to the home page after logout
   };
 
   return (
@@ -46,8 +46,8 @@ const Header = ({ toggleNavbar }) => {
           <img src={logo} alt="Staymate Logo" className="h-12" />
         </div>
         <div className="ml-4 text-white">
-          <h1 className="text-2xl font-bold">TASTNEST</h1>
-          <p className="text-sm">Create Youtr Own TaskLsit</p>
+          <h1 className="text-2xl font-bold">TASKNEST</h1>
+          <p className="text-sm">Create Youtr Own TaskList</p>
         </div>
     </div>
     {currentUser ? (
@@ -68,7 +68,7 @@ const Header = ({ toggleNavbar }) => {
           {dropdownOpen && (
             <div className="absolute top-12 right-0 mt-2 w-56 bg-white rounded-md shadow-lg z-50">
               <Link
-                to={`/users/ViewProfile/${currentUser.id}`}
+                to={`user/ViewProfile/${currentUser.id}`}
                 className="px-4 py-4 text-gray-800 hover:bg-gray-100 rounded-t-md flex items-center"
               >
                 <FaUser className="text-blue-500 mr-2" />

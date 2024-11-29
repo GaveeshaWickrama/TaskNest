@@ -11,6 +11,7 @@ function PublicRoutes() {
   return (
     <Routes>
       
+      <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/verify-otp" element={<VerifyOtp />} />
       <Route path="/signup" element={<Signup />} />

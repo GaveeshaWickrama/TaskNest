@@ -26,11 +26,11 @@ const PasswordReset = () => {
   // Function to request OTP and validate email
   const handleRequestOtp = async (e) => {
     e.preventDefault();
-    setError(null);  // Reset errors
+    setError(null);  // Reset errors    
     setLoading(true);  // Start loading spinner
 
     try {
-      const result = await requestPasswordReset(email); // Use the context function
+      const result = await requestPasswordReset({email}); // Use the context function
 
       // Check the response for email validation
       if (!result.error) {
@@ -38,7 +38,7 @@ const PasswordReset = () => {
         setEmailValidated(true); // Set email validated flag
       } else {
         // Email is invalid, show error and do not proceed
-        setError(result.message); // Use result.message to show exact error
+        setError(result.error); // Use result.message to show exact error
       }
     } catch (err) {
       // Handle unexpected errors

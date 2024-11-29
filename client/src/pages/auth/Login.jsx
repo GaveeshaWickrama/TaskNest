@@ -50,7 +50,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit} className="bg-white p-8 pt-4 rounded shadow-md w-full max-w-sm">
       <Logo />
-      <h2 className="text-2xl font-bold mb-10 text-center">Log in to STAYMATE</h2>
+      <h2 className="text-2xl font-bold mb-10 text-center">Log in to TASKNEST</h2>
       <InputField
         id="email"
         name="email"

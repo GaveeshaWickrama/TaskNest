@@ -6,7 +6,7 @@ function authToken(req, res, next) {
   const token = authHeader && authHeader.split(' ')[1];
   if (token == null) return res.sendStatus(401);
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return res.sendStatus(403); // Invalid token
 
     // Add the decoded user to the request so that it can be used in your routes
@@ -14,16 +14,6 @@ function authToken(req, res, next) {
     next();
   });
 }
-//Usage app.get('/users', authToken, userRoutes);
-
-// function requireRole(req, res, role , next) {
-//   // Check if the role from req.user is 'admin'
-//   if (req.user && req.user.role === role) {
-//     next();
-//   } else {
-//     res.status(403).json({ message: "Access denied. Admins only." });
-//   }
-// }
 
 function requireUser(req, res, next) {
   // Check if the role from req.user is 'admin'

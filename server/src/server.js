@@ -13,7 +13,7 @@ const mongoose = require('mongoose')
 // const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
 const adminRoutes = require('./routes/adminRoutes')
-
+const userRoutes = require('./routes/userRoutes')
 
 
 mongoose.connect(process.env.MONGO_URI)  //use 127.0.0.1 insted of localhost
@@ -34,7 +34,7 @@ transporter.verify((error, success) => {
 app.use('/auth' , authRoutes)
 // app.use('/users', userRoutes)
 app.use('/admin', adminRoutes)
-// app.use('/users',  userRoutes)
+app.use('/user',  userRoutes)
 // const test = require('./routes/test')
 // app.use('/test' , test)
 

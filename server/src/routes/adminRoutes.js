@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
-const { authToken , requireUser, requireAdmin } = require('../middleware/authProvider')
+const { authToken , requireAdmin } = require('../middleware/authProvider')
 
 // get all users 
 router.get('/users',  authToken, requireAdmin, adminController.getAllUsers); 

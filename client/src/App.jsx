@@ -16,12 +16,12 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <Header toggleNavbar={toggleNavbar} />
-      <div className={`flex-grow flex ${isNavbarVisible ? 'ml-0' : ''}`}>
-        <Navbar isVisible={isNavbarVisible} />
-        <div className={`main-content flex-grow  ${isNavbarVisible ? 'ml-64' : ''}`} style={{ marginTop: '5rem' } } >
-          <Router>
+    <Router>
+      <div className="flex flex-col h-full">
+        <Header toggleNavbar={toggleNavbar} />
+        <div className={`flex-grow flex ${isNavbarVisible ? 'ml-0' : ''}`}>
+          <Navbar isVisible={isNavbarVisible} />
+          <div className={`main-content flex-grow  ${isNavbarVisible ? 'ml-64' : ''}`} style={{ marginTop: '5rem' } } >
             <div>
               <Routes>
                 <Route path="/*" element={<PublicRoutes />} />
@@ -30,10 +30,10 @@ function App() {
                 <Route path="/Unauthorized" element={<Unauthorized />} />
               </Routes>
             </div>
-          </Router>
+          </div>
         </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
