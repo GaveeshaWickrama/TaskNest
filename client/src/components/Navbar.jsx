@@ -100,6 +100,7 @@ function Navbar({ isVisible }) {
   const userLinks = [
     // { path: "/technician/dashboard", label: "Home" },
     { path: "/user/dashboard", label: "Dashboard" },
+    { path: "/user/changePassword", label: "Change Password" },
     
   ];
 

@@ -43,7 +43,7 @@ const VerifyOtp = () => {
     if (error) {
       setError(error);
     } else {
-      navigate('/'); // Redirect to home after successful verification
+      navigate('/login'); // Redirect to home after successful verification
     }
   };
 

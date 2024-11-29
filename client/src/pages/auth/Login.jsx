@@ -28,10 +28,6 @@ const LoginForm = () => {
       console.log('Error set:', 'Please enter a valid email address.');
       return;
     }
-    console.log("came 1");
-    console.log({error});
-    console.log("came 2");
-
     try {
       const result = await login(email, password);
       console.log(result);
