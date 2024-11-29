@@ -66,13 +66,15 @@ const authService = {
   // New function to reset password using OTP
   resetPassword: async (email, otp, newPassword) => {
     try {
-      const response = await authService.resetPassword(email, otp, newPassword);
-      if (response.error) {
-        return { error: response.message };
-      }
-      return { error: null }; // Password reset successfully
+      console.log("Did u come here too?");
+      const response = await axios.post(`${API_URL}/auth/verify-otp-reset-password`, {email, otp, newPassword});
+      const { accessToken, user } = response.data;
+      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', accessToken);
+      return { user, error: null };
     } catch (error) {
-      return { error: 'Error resetting password' };
+      const errorMessage = error.response?.data?.message || 'OTP verification failed';
+      return { user: null, error: errorMessage };
     }
   }
 

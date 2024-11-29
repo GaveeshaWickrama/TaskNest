@@ -259,6 +259,8 @@ async function requestPassword(req, res) {
 }
 
 async function verifyOtpRestPassword(req, res) {
+    console.log(req.body);
+    console.log("aaaaaaaaaaaaaaaaaaaannnnnnn");
     const { email, otp, newPassword } = req.body;
 
     if (!email || !otp) {

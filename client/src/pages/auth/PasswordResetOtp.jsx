@@ -52,21 +52,19 @@ const PasswordReset = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setError(null); // Reset any previous errors
-    setLoading(true); // Start the loading spinner
   
     // Validate password match
     if (newPassword !== reenteredPassword) {
       setError('Passwords do not match.');
-      setLoading(false); // Stop loading spinner
       return;
     }
   
     try {
-      // Call the resetPassword function from context
+      setLoading(true); // Start the loading spinner
       const result = await resetPassword(email, otp, newPassword);
-  
-      // Check the response: if error is false, proceed to login page, otherwise display error
-      if (result && result.error === false) {
+      console.log('Reset Password Result:', result);
+
+      if (result && result.error === null ) {
         // Redirect to login page after successful password reset
         navigate('/login');
       } else {
