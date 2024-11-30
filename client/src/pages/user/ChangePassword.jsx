@@ -90,47 +90,52 @@ const ChangePassword = () => {
         {loading && <LoadingSpinner message="Processing..." />}
         {error && <ErrorAlert message={error} />}
 
-        <InputField
-          id="currentPassword"
-          name="currentPassword"
-          type="text"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          placeholder="Current Password"
-          IconComponent={FaLock}
-          disabled={loading}
-        />
-        <InputField
-          id="newPassword"
-          name="newPassword"
-          type="password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          placeholder="New Password"
-          IconComponent={FaLock}
-          disabled={loading}
-        />
-        <InputField
-          id="reenteredPassword"
-          name="reenteredPassword"
-          type="password"
-          value={reenteredPassword}
-          onChange={(e) => setReenteredPassword(e.target.value)}
-          placeholder="Re-enter New Password"
-          IconComponent={FaLock}
-          disabled={loading}
-        />
-        <p className="text-gray-500 text-sm text-center mt-2">
-          Use at least 8 characters, including letters, numbers, and symbols for a strong password.
-        </p>
-        <button
-          onClick={handleChangePassword}
-          className="w-full bg-blue-700 text-white p-2 rounded flex items-center justify-center hover:bg-blue-900 transition-colors mt-4"
-          disabled={loading}
-        >
-          <FaCheck className="mr-2" />
-          Reset Password
-        </button>
+        {!showPopup && (
+  <>
+    <InputField
+      id="currentPassword"
+      name="currentPassword"
+      type="text"
+      value={currentPassword}
+      onChange={(e) => setCurrentPassword(e.target.value)}
+      placeholder="Current Password"
+      IconComponent={FaLock}
+      disabled={loading}
+    />
+    <InputField
+      id="newPassword"
+      name="newPassword"
+      type="password"
+      value={newPassword}
+      onChange={(e) => setNewPassword(e.target.value)}
+      placeholder="New Password"
+      IconComponent={FaLock}
+      disabled={loading}
+    />
+    <InputField
+      id="reenteredPassword"
+      name="reenteredPassword"
+      type="password"
+      value={reenteredPassword}
+      onChange={(e) => setReenteredPassword(e.target.value)}
+      placeholder="Re-enter New Password"
+      IconComponent={FaLock}
+      disabled={loading}
+    />
+    <p className="text-gray-500 text-sm text-center mt-2">
+      Use at least 8 characters, including letters, numbers, and symbols for a strong password.
+    </p>
+    <button
+      onClick={handleChangePassword}
+      className="w-full bg-blue-700 text-white p-2 rounded flex items-center justify-center hover:bg-blue-900 transition-colors mt-4"
+      disabled={loading}
+    >
+      <FaCheck className="mr-2" />
+      Reset Password
+    </button>
+  </>
+)}
+
       </form>
     </div>
   );

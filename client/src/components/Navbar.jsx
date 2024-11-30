@@ -3,50 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { IconContext } from "react-icons";
 import { RiLogoutBoxRLine } from "react-icons/ri";
-import { BsFillHousesFill } from "react-icons/bs";
-import { FaCreditCard } from "react-icons/fa";
-import {
-  MdDashboard,
-  MdAccountCircle,
-  MdBuild,
-  MdGroup,
-  MdAssessment,
-} from "react-icons/md";
-import { CiCircleList } from "react-icons/ci";
-import { MdReportProblem } from "react-icons/md";
-
+import { MdDashboard, MdAccountCircle } from "react-icons/md";
 
 const iconMap = {
   Home: "home",
   "Dashboard": <MdDashboard />,
-  "Manage Moderators": <MdAccountCircle />,
-  "User Page": "account_circle",
-  "My Profile": "account_circle",
-  Moderators: "account_circle",
-  PropertyOwners: "account_circle",
-  Tenants: "account_circle",
-  "My Profile": "account_circle",
-  Moderators: "account_circle",
-  PropertyOwners: "account_circle",
-  Tenants: "account_circle",
-  Reviews: "rate_review",
-  Reservations: "event_available",
-  "Host Dashboard": "dashboard",
-  "Your Listings": "house",
-  "New Listing": "add_box",
-  Login: "login",
-  Signup: "person_add",
-  Chat: "chat",
-  "View New Properties": <BsFillHousesFill />,
-  Payments: <FaCreditCard />,
-  Report: <MdAssessment />,
-  Technicians: <MdBuild />,
-  "My Listings": <CiCircleList />,
-  "Complaints": <MdReportProblem />,
-  "Manage Users": <MdGroup />,
-  
-  
-  
+  "Change Password": <MdAccountCircle />,  
 };
 
 function Sidebar({ title, links, logout, isVisible }) {
