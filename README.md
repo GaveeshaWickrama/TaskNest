@@ -2,10 +2,6 @@
 
 A simple website to create a To-DO List.
 
-## Description 
-
-Can Create, Update, Delete tasks, View all tasks and Sort by date and time. 
-
 ## Installation Guide
 
 ### Prerequisites
@@ -58,5 +54,7 @@ npm run dev
 ```
 npm run dev
 ```
+## Authors
 
+* <your name with hyper link to github profile>
 
