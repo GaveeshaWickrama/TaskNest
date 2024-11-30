@@ -54,10 +54,12 @@ npm run dev
 ```
 npm run dev
 ```
-## Version History
+## Functionalities
 
-* 0.1
-    * Initial Release
+* Task Management:
+    * Create, update, and delete tasks.
+    * View all tasks and sort them by date and time.
+    * Highlight tasks for the current day for better prioritization.
 
 ## Functionalities
 
