@@ -1,10 +1,10 @@
 # TaskNest
 
-Simple overview of use/purpose.<within 1 line>
+A simple website to create a To-DO List.
 
 ## Description 
 
-An in-depth paragraph about your project and overview of use.
+Can Create, Update, Delete tasks, View all tasks and Sort by date and time. 
 
 ## Installation Guide
 
@@ -20,7 +20,7 @@ Ensure you have the access to following in your system:
 
 * Clone the repository using following command.
 ```
-git clone <repo link>
+git clone https://github.com/GaveeshaWickrama/TaskNest.
 ```
 * Run the following commands to install required modules for the frontend.
 ```
@@ -34,13 +34,13 @@ cd backend
 npm install
 ```
 
-* Navigate to backend folder and create a .ENV file there.
-* .ENV structure is as follows.
+* Navigate to backend folder and create a .env file there.
+* .env structure is as follows.
 
 ```
 DATABASE_URL=<mongoDB-connection-string>
 ACCESS_TOKEN_SECRET=<your_secret_key_for_jwt>
-PORT=<frontend-port>
+PORT=5000
 
 EMAIL_SERVICE=gmail
 EMAIL_USER=<gmail_address>
@@ -51,19 +51,12 @@ EMAIL_PASS=<gmail_password>
 
 * To run the backend
 ```
-npm start
+npm run dev
 ```
 
 * To run the frontend
 ```
-npm start
+npm run dev
 ```
 
-## Authors
 
-* <your name with hyper link to github profile>
-
-## Version History
-
-* 0.1
-    * Initial Release
