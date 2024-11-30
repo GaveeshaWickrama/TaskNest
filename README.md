@@ -54,6 +54,11 @@ npm run dev
 ```
 npm run dev
 ```
+## Version History
+
+* 0.1
+    * Initial Release
+
 ## Functionalities
 
 * Task Management:
