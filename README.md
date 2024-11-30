@@ -1,24 +1,69 @@
 # TaskNest
---------------------------------------------------------------------------------
-server/Express
 
-❗ IMPORTANT :- CD into server and run "npm install"
+Simple overview of use/purpose.<within 1 line>
 
-add these to .env IN SERVER folder 
+## Description 
 
-DATABASE_URL=mongodb://127.0.0.1:27017/StayMate
+An in-depth paragraph about your project and overview of use.
 
-ACCESS_TOKEN_SECRET=your_secret_key
+## Installation Guide
 
-✅ npm run dev <- to start server 
+### Prerequisites
 
---------------------------------------------------------------------------------
-client/React
+Ensure you have the access to following in your system:
+* Node.js
+* npm (Node Package Manager)
+* Working MongoDB connection string
+* Gmail Email service
 
-❗ IMPORTANT :- CD into client and run "npm install"
+### Set Up
 
-add these to .env IN CLIENT folder 
+* Clone the repository using following command.
 
-API_URL=http://localhost:3000
+git clone <repo link>
 
-✅ npm run dev <- to start vite app 
+* Run the following commands to install required modules for the frontend.
+
+cd frontend
+npm install
+
+
+* To install the required modules for backend run the following command
+
+cd backend
+npm install
+
+
+* Navigate to backend folder and create a .ENV file there.
+* .ENV structure is as follows.
+
+
+DATABASE_URL=<mongoDB-connection-string>
+ACCESS_TOKEN_SECRET=<your_secret_key_for_jwt>
+PORT=<frontend-port>
+
+EMAIL_SERVICE=gmail
+EMAIL_USER=<gmail_address>
+EMAIL_PASS=<gmail_password>
+
+
+### Executing program
+
+* To run the backend
+
+npm start
+
+
+* To run the frontend
+
+npm start
+
+
+## Authors
+
+* <your name with hyper link to github profile>
+
+## Version History
+
+* 0.1
+    * Initial Release
