@@ -54,7 +54,22 @@ npm run dev
 ```
 npm run dev
 ```
-## Authors
+## Functionalities
 
-* <your name with hyper link to github profile>
+* Task Management:
 
+Create, update, and delete tasks.
+View all tasks and sort them by date and time.
+Highlight tasks for the current day for better prioritization.
+User Authentication and Security:
+
+User registration and login functionality for secure access.
+"Forgot Password" feature with an email verification process for account recovery.
+Change password feature to enhance account security.
+User Dashboard:
+
+A dedicated dashboard to view user information.
+Integrated to-do list for managing daily tasks efficiently.
+Logout Feature:
+
+Securely log out from the application to protect user sessions.
